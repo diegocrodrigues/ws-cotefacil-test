@@ -23,4 +23,8 @@ public class PlanetService {
 		Optional<Planet> obj = repository.findById(id);
 		return obj.get();
 	}
+	
+	public Planet insert(Planet obj) {
+		return repository.save(obj);
+	}
 }

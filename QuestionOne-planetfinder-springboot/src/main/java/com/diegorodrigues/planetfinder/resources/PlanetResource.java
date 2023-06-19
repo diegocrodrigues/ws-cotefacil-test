@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -23,6 +24,14 @@ public class PlanetResource {
 	
 	@Autowired
 	private PlanetService service;
+	
+	@PostMapping
+	public ResponseEntity<Planet> insert(@RequestBody Planet obj){
+		obj = service.insert(obj);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+				.buildAndExpand(obj.getId()).toUri();
+		return ResponseEntity.created(uri).body(obj);
+	}
 	
 	@GetMapping
 	public ResponseEntity<List<Planet>> findAll(){
@@ -37,12 +46,10 @@ public class PlanetResource {
 		return ResponseEntity.ok().body(obj);
 	}
 	
-	@PostMapping
-	public ResponseEntity<Planet> insert(@RequestBody Planet obj){
-		obj = service.insert(obj);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-				.buildAndExpand(obj.getId()).toUri();
-		return ResponseEntity.created(uri).body(obj);
+	@GetMapping(value = "/name")
+	public ResponseEntity<List<Planet>> findById(@RequestParam(name = "name") String name) {
+		List<Planet> list = service.findByName(name.trim().toUpperCase());
+		return ResponseEntity.ok().body(list);
 	}
 	
 	@DeleteMapping(value = "/{id}")

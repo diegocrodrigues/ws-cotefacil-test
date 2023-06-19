@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.diegorodrigues.planetfinder.entities.Planet;
 import com.diegorodrigues.planetfinder.repositories.PlanetRepository;
+import com.diegorodrigues.planetfinder.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class PlanetService {
@@ -15,17 +16,22 @@ public class PlanetService {
 	@Autowired
 	private PlanetRepository repository;
 	
+	public Planet insert(Planet obj) {
+		return repository.save(obj);
+	}
+	
 	public List<Planet> findAll(){
 		return repository.findAll();
 	}
 	
 	public Planet findById(Long id) {
 		Optional<Planet> obj = repository.findById(id);
-		return obj.get();
+		return obj.orElseThrow(() -> new ResourceNotFoundException(id));
 	}
 	
-	public Planet insert(Planet obj) {
-		return repository.save(obj);
+	public List<Planet> findByName(String name) {
+		List<Planet> list = repository.findByName(name);
+		return list;
 	}
 	
 	public void delete(Long id) {

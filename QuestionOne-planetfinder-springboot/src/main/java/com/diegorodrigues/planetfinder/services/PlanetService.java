@@ -27,4 +27,8 @@ public class PlanetService {
 	public Planet insert(Planet obj) {
 		return repository.save(obj);
 	}
+	
+	public void delete(Long id) {
+		repository.deleteById(id);
+	}
 }

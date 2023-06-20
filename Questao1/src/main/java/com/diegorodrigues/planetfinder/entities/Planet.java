@@ -18,16 +18,18 @@ public class Planet implements Serializable{
 	private String nome;
 	private String clima;
 	private String terreno;
+	private Integer qtdeAparcicoesFilmes;
 	
 	public Planet() {
 	}
 	
-	public Planet(Long id, String nome, String clima, String terreno) {
+	public Planet(Long id, String nome, String clima, String terreno, Integer qtdeAparcicoesFilmes) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.clima = clima;
 		this.terreno = terreno;
+		this.qtdeAparcicoesFilmes = qtdeAparcicoesFilmes; 
 	}
 
 	public Long getId() {
@@ -60,6 +62,14 @@ public class Planet implements Serializable{
 
 	public void setTerreno(String terreno) {
 		this.terreno = terreno;
+	}
+
+	public Integer getQtdeAparcicoesFilmes() {
+		return qtdeAparcicoesFilmes;
+	}
+
+	public void setQtdeAparcicoesFilmes(Integer qtdeAparcicoesFilmes) {
+		this.qtdeAparcicoesFilmes = qtdeAparcicoesFilmes;
 	}
 
 	@Override

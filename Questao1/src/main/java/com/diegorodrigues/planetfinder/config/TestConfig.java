@@ -20,8 +20,8 @@ public class TestConfig implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		
-		Planet p1 = new Planet(null, "Diegolandia", "frio", "arenoso");
-		Planet p2 = new Planet(null, "Planetinha do DG", "quente", "umido");
+		Planet p1 = new Planet(null, "Diegolandia", "frio", "arenoso", 0);
+		Planet p2 = new Planet(null, "Planeta Cotefacil", "quente", "umido", 0);
 		
 		planetRepository.saveAll(Arrays.asList(p1, p2));
 		
